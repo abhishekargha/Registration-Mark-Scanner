@@ -1,0 +1,2 @@
+# Registration-Mark-Scanner
+My bot is a portable device which can be used in any printing machine which uses "process control patches" to ensure proper alignment throughout the printing process of any package. I have used an RGB Sensor which helps validate alignment of print, and help quality teams solve issues such as if the machine needs to be recalibrated. This bot provides an alternate and cheaper solution to small scale printing industries which do not use this method for printing and hence eliminate blurry packages.
