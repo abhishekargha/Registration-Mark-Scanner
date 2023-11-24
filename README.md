@@ -20,23 +20,23 @@ Step 3: Algorithm
 The algorithm governing the Registration Mark Scanner's operation is as follows:
 
 Registration Marks Detected:
-
 The scanner continuously monitors for the presence of registration marks.
+
 Detect First Registration Mark:
-
 Upon detecting the first registration mark, the scanner initiates a predefined sequence.
+
 Wait for N Milliseconds:
-
 Awaiting the machine's set time interval (N milliseconds) to allow for subsequent registration mark detection.
+
 Detect Registration Marks:
-
 The scanner, synchronized with the machine's speed, systematically scans for registration marks during the designated time interval.
+
 Alarm:
-
 In the event of a detected defect or absence of registration marks, the system activates an alarm, signaling a potential issue.
-Registration Marks Not Detected:
 
+Registration Marks Not Detected:
 If registration marks are not detected within the specified time, the system triggers an alert, indicating a need for attention.
+
 Implementation:
 To practically execute defect detection, the Arduino board is instructed to look for a Red Spot at one-second intervals, corresponding to the speed of the printing machine. Upon spotting the red mark, the system waits for the next interval, maintaining a continuous check. If no red spot is identified, an alarm is activated – initially demonstrated with an LED in the prototype for communication purposes.
 
