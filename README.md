@@ -10,13 +10,13 @@ The device embarks on an intelligent learning journey by training the microcontr
 Versatility is the Registration Mark Scanner's forte, effortlessly adaptable to any printing machine. To complete its training, a simple adjustment of the "delay()" function is required. The unit, measured in nanoseconds, proves to be a game-changer for high-speed printing machines. The assigned value to the "delay()" function is finely tuned, reflecting the time it takes for one batch of registration marks to traverse a specific point on the printing machine.
 Here's a detailed breakdown of its operation:
 
-Step 1: Placement
+Step 1: Placement:
 The RGB sensor is strategically positioned on the printing machine, precisely at a distance within its sensing range and aligned with the first registration mark.
 
-Step 2: Calibration
+Step 2: Calibration:
 The Registration Mark Scanner takes a systematic approach to calibration, adapting to the printing machine's speed denoted as N milliseconds. This step ensures synchronization with the machine's operational tempo, optimizing its responsiveness.
 
-Step 3: Algorithm
+Step 3: Algorithm:
 The algorithm governing the Registration Mark Scanner's operation is as follows:
 
 Registration Marks Detected:
