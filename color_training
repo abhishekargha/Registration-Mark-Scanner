@@ -30,6 +30,15 @@ int blueFrequency = 0;
 // Define the variable for storing the detected color
 int color = COLOR_NONE;
 
+// Define the pin for the buzzer
+#define buzzer 10 //buzzer to arduino pin 10
+
+// Define the array for the desired color sequence
+int colorSequence[] = {COLOR_RED, COLOR_BLUE, COLOR_GREEN, COLOR_YELLOW, COLOR_PINK};
+
+// Define the variable for the current index in the color sequence
+int colorIndex = 0;
+
 void setup() {
   // Set the pins as outputs or inputs
   pinMode(S0, OUTPUT);
@@ -37,6 +46,7 @@ void setup() {
   pinMode(S2, OUTPUT);
   pinMode(S3, OUTPUT);
   pinMode(sensorOut, INPUT);
+  pinMode(buzzer, OUTPUT); // Set the buzzer pin as an output
 
   // Set the frequency scaling to 20%
   // You can change this value to 2%, 20%, or 100% by changing the HIGH and LOW of S0 and S1
@@ -64,6 +74,17 @@ void loop() {
   // Detect the color using a decision tree
   color = detectColor(redFrequency, greenFrequency, blueFrequency);
 
+  // Check the color sequence
+  if (color == colorSequence[colorIndex]) {
+    // The color matches the sequence
+    noTone(buzzer); // Stop the buzzer sound
+    colorIndex++; // Increment the index
+    colorIndex = colorIndex % 5; // Wrap around the index
+  } else {
+    // The color does not match the sequence
+    tone(buzzer, 1000); // Start the buzzer sound
+  }
+
   // Print the detected color to the serial monitor
   Serial.print("Color: ");
   switch (color) {
@@ -87,8 +108,9 @@ void loop() {
       break;
   }
 
-  // Add a delay to avoid spamming the serial monitor
-  delay(500);
+  // Add a delay of N nanoseconds before repeating the process
+  // You can change the value of N according to your needs
+  delayMicroseconds(N); // N is in nanoseconds
 }
 
 // A function to read the frequency value from the sensor
@@ -112,21 +134,22 @@ int detectColor(int red, int green, int blue) {
   int color = COLOR_NONE;
 
   // Check if the frequency values are within the threshold ranges for each color
+  // Change the order of the if-else statements to look for red, blue, green, yellow, and pink colors
   if (red >= RED_MIN && red <= RED_MAX) {
     // Red color detected
     color = COLOR_RED;
-  } else if (green >= GREEN_MIN && green <= GREEN_MAX) {
-    // Green color detected
-    color = COLOR_GREEN;
   } else if (blue >= BLUE_MIN && blue <= BLUE_MAX) {
     // Blue color detected
     color = COLOR_BLUE;
-  } else if (red >= RED_MIN && red <= RED_MAX && blue >= BLUE_MIN && blue <= BLUE_MAX) {
-    // Pink color detected
-    color = COLOR_PINK;
+  } else if (green >= GREEN_MIN && green <= GREEN_MAX) {
+    // Green color detected
+    color = COLOR_GREEN;
   } else if (red >= RED_MIN && red <= RED_MAX && green >= GREEN_MIN && green <= GREEN_MAX) {
     // Yellow color detected
     color = COLOR_YELLOW;
+  } else if (red >= RED_MIN && red <= RED_MAX && blue >= BLUE_MIN && blue <= BLUE_MAX) {
+    // Pink color detected
+    color = COLOR_PINK;
   }
 
   // Return the color
